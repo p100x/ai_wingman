@@ -77,6 +77,31 @@ const prompt = `Generiere 3 ${
       const chunkValue = decoder.decode(value);
       parser.feed(chunkValue);
     }
+    // Send the generated output to the backend
+  const sendOutputToBackend = async (output: string) => {
+    try {
+      const response = await fetch('/api/logOutput', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ output }),
+      });
+      if (response.ok) {
+        console.log('Output logged successfully');
+      } else {
+        console.error('Failed to log output');
+      }
+    } catch (error) {
+      console.error('Error logging output:', error);
+    }
+  };
+ // Call the sendOutputToBackend function with the generated output
+  sendOutputToBackend(generatedBios);
+
+  scrollToBios();
+  setLoading(false);
+};
     scrollToBios();
     setLoading(false);
   };
