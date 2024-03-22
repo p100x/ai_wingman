@@ -101,7 +101,7 @@ const prompt = `Generiere 3 ${
           <b>96,434</b> Dates geklärt
         </p>
         <h1 className="sm:text-6xl text-4xl max-w-[708px] font-bold text-slate-900">
-          K.I. Date-Doctor - Nie wieder unangenehmes Schweigen
+          Keine Ahnung was du antworten sollst? Rizzomat hilft dir!
         </h1>
   
         <div className="max-w-xl w-full">
