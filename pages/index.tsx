@@ -14,6 +14,19 @@ import {
 } from 'eventsource-parser';
 
 const Home: NextPage = () => {
+  const Home: NextPage = () => {
+  useEffect(() => {
+    // Hotjar-Tracking-Code als Inline-Script hinzufügen
+    const hotjarScript = document.createElement('script');
+    hotjarScript.async = true;
+    hotjarScript.src = `https://static.hotjar.com/c/hotjar-3917082.js?sv=6`;
+    document.body.appendChild(hotjarScript);
+
+    return () => {
+      // Beim Aufräumen den Hotjar-Script-Tag entfernen
+      document.body.removeChild(hotjarScript);
+    };
+  }, []);
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState('');
   const [vibe, setVibe] = useState<VibeType>('Locker');
