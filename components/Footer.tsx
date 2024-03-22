@@ -9,7 +9,7 @@ export default function Footer() {
         and{' '}
         {' '}
         <span className="font-bold transition">
-          Solutions
+          Web Solutions
         </span>
       </div>
       <div className="flex space-x-4 pb-4 sm:pb-0">
