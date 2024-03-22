@@ -29,11 +29,11 @@ const Home: NextPage = () => {
     }
   };
 
-  const prompt = `Generate 3 ${
+  const prompt = `Generiere 3 ${
     vibe === 'Casual' ? 'relaxed' : vibe === 'Funny' ? 'silly' : 'Professional'
-  } twitter biographies with no hashtags and clearly labeled "1.", "2.", and "3.". Only return these 3 twitter bios, nothing else. ${
-    vibe === 'Funny' ? 'Make the biographies humerous' : ''
-  }Make sure each generated biography is less than 300 characters, has short sentences that are found in Twitter bios, and feel free to use this context as well: ${bio}${
+  } Antworten für einen Chat auf Tinder mit dem obersten Ziel ein Date zu ergattern, gelabeled als "1.", "2.", and "3.". Gib nur diese drei Nachrichten zurück, nichts anderes. ${
+    vibe === 'Funny' ? 'Make the text humerous' : ''
+  }Nutze dabei diesen Text als Ausgangspunkt der Unterhaltung: ${bio}${
     bio.slice(-1) === '.' ? '' : '.'
   }`;
 
