@@ -134,8 +134,8 @@ const Home: NextPage = () => {
               className="mb-5 sm:mb-0"
             />
             <p className="text-left font-medium">
-              Drop in your job{' '}
-              <span className="text-slate-500">(or your favorite hobby)</span>.
+              Ihre/Seine letzte Nachricht{' '}
+              <span className="text-slate-500">(oder leer lassen)</span>.
             </p>
           </div>
           <textarea
@@ -147,7 +147,7 @@ const Home: NextPage = () => {
           />
           <div className="flex mb-5 items-center space-x-3">
             <Image src="/2-black.png" width={30} height={30} alt="1 icon" />
-            <p className="text-left font-medium">Select your vibe.</p>
+            <p className="text-left font-medium">Wähle deinen Vibe.</p>
           </div>
           <div className="block">
             <DropDown vibe={vibe} setVibe={(newVibe) => setVibe(newVibe)} />
