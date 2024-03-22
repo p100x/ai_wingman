@@ -25,9 +25,9 @@ const Home: NextPage = () => {
     }
   };
 const prompt = `Generiere 3 ${
-  vibe === 'Locker' ? 'entspannt und dominant' : vibe === 'Lustig' ? 'blödelnd aber herzlich' : vibe === 'Friendly' ? 'warm' : 'Professional'
-} Antworten für einen Chat auf Tinder mit dem obersten Ziel ein Date zu ergattern, gelabeled als "1.", "2.", and "3.". Gib nur diese drei Nachrichten zurück, nichts anderes. ${
-  vibe === 'Funny' ? 'Make the text humerous' : ''
+  vibe === 'Locker' ? 'entspannte' : vibe === 'Lustig' ? 'witzige' : vibe === 'Horny' ? 'erotische' : 'coole'
+} Antworten für einen Chat auf Tinder wie ein extrem erfahrener Date-Doktor und Psychologie-Experte, gelabeled als "1.", "2.", and "3.". Gib nur diese drei Nachrichten zurück, nichts anderes. ${
+  vibe === 'Lustig' ? 'Mache den Text humorvoll' : ''
 }Nutze dabei diesen Text als Ausgangspunkt der Unterhaltung: ${bio}${
   bio.slice(-1) === '.' ? '' : '.'
 }`;
