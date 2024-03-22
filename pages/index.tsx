@@ -81,7 +81,7 @@ const prompt = `Generiere 3 ${
   // Send the generated output to the backend
  const sendOutputToBackend = async (output: string) => {
     try {
-    const response = await fetch('/api/logOutputs', {
+    const response = await fetch('/api/logOutput', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
