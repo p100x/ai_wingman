@@ -16,7 +16,7 @@ import {
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState('');
-  const [vibe, setVibe] = useState<VibeType>('Professional');
+  const [vibe, setVibe] = useState<VibeType>('Locker');
   const [generatedBios, setGeneratedBios] = useState<String>('');
   const bioRef = useRef<null | HTMLDivElement>(null);
   const scrollToBios = () => {
