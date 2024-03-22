@@ -86,7 +86,7 @@ const prompt = `Generiere 3 ${
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
-        <title>K.I. Wingman</title>
+        <title>Rizz Sprüche | Mit künstlicher Intelligenz zum Rizz-God werden</title>
         <link rel="icon" href="/favicon.ico" />
                {/* Mouseflow Tracking Code */}
         <script type="text/javascript">
