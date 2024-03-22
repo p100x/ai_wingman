@@ -163,7 +163,7 @@ const prompt = `Generiere 3 ${
                   className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto"
                   ref={bioRef}
                 >
-                  KI-optimierte Antworten:
+                  Deine KI-optimierte Antworten:
                 </h2>
               </div>
               <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
