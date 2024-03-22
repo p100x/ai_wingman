@@ -115,7 +115,6 @@ const prompt = `Generiere 3 ${
             />
             <p className="text-left font-medium">
               Ihre/Seine letzte Nachricht{' '}
-                          Ihre/Seine letzte Nachricht{' '}
               <span className="text-slate-500">(oder leer lassen)</span>.
             </p>
           </div>
