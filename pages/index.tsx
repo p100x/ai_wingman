@@ -17,16 +17,14 @@ const Home: NextPage = () => {
   const [bio, setBio] = useState('');
   const [vibe, setVibe] = useState<VibeType>('Locker');
   const [generatedBios, setGeneratedBios] = useState<String>('');
-  const [generatedBios, setGeneratedBios] = useState<string>('');
   const bioRef = useRef<null | HTMLDivElement>(null);
-
   const scrollToBios = () => {
     if (bioRef.current !== null) {
       bioRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 const prompt = `Generiere 3 ${
-  vibe === 'Locker' ? 'entspannte' : vibe === 'Lustig' ? 'witzige' : vibe === 'Horny' ? 'sehr aufs äußere bezogene und erotisch betonte' : 'distanzierte'
+  vibe === 'Locker' ? 'entspannte' : vibe === 'Lustig' ? 'witzige' : vibe === 'Horny' ? 'sehr aufs äußere bezogene und erotisch betonte' : 'coole'
 } Antworten für einen Chat auf einer Dating-App wie ein erfahrener Dating-Coach es seinen Schülern vormachen würde, gelabeled als "1.", "2.", and "3.". Gib nur diese drei Nachrichten zurück, nichts anderes, stets ohne Anführungszeichen. ${
   vibe === 'Lustig' ? 'Mache den Text humorvoll' : ''
 }Schreibe wie ein junger Mensch, schreibe Alltagssprache, vermeide hohle Phrasen und Smalltalk um jeden Preis. Nutze Jugendslang wenn angebracht. Nutze dabei diesen Text als Ausgangspunkt der Unterhaltung: ${bio}${
@@ -35,52 +33,53 @@ const prompt = `Generiere 3 ${
   console.log({ prompt });
   console.log({ generatedBios });
   const generateBio = async (e: any) => {
-  e.preventDefault();
-  setGeneratedBios('');
-  setLoading(true);
-  const response = await fetch('/api/openai', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      prompt,
-    }),
-  });
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-  // This data is a ReadableStream
-   const data = response.body;
-  if (!data) {
-    return;
-  }
-  const onParseGPT = (event: ParsedEvent | ReconnectInterval) => {
-    if (event.type === 'event') {
-      const data = event.data;
-      try {
-        const text = JSON.parse(data).text ?? '';
-        setGeneratedBios((prev) => prev + text);
-      } catch (e) {
-        console.error(e);
-      }
+    e.preventDefault();
+    setGeneratedBios('');
+    setLoading(true);
+    const response = await fetch('/api/openai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
     }
+    // This data is a ReadableStream
+    const data = response.body;
+    if (!data) {
+      return;
+    }
+    const onParseGPT = (event: ParsedEvent | ReconnectInterval) => {
+      if (event.type === 'event') {
+        const data = event.data;
+        try {
+          const text = JSON.parse(data).text ?? '';
+          setGeneratedBios((prev) => prev + text);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    const onParse = onParseGPT;
+    // https://web.dev/streams/#the-getreader-and-read-methods
+    const reader = data.getReader();
+    const decoder = new TextDecoder();
+    const parser = createParser(onParse);
+    let done = false;
+    while (!done) {
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+      const chunkValue = decoder.decode(value);
+      parser.feed(chunkValue);
+    }
+    scrollToBios();
+    setLoading(false);
   };
-  const onParse = onParseGPT;
-  // https://web.dev/streams/#the-getreader-and-read-methods
-  const reader = data.getReader();
-  const decoder = new TextDecoder();
-  const parser = createParser(onParse);
-  let done = false;
-  while (!done) {
-    const { value, done: doneReading } = await reader.read();
-    done = doneReading;
-    const chunkValue = decoder.decode(value);
-    parser.feed(chunkValue);
-  }
-  
-};
-return (
+  return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
         <title>K.I. Wingman</title>
@@ -105,6 +104,9 @@ return (
               className="mb-5 sm:mb-0"
             />
             <p className="text-left font-medium">
+              Drop in your job{' '}
+              <span className="text-slate-500">(or your favorite hobby)</span>.
+              Ihre/Seine letzte Nachricht{' '}
                           Ihre/Seine letzte Nachricht{' '}
               <span className="text-slate-500">(oder leer lassen)</span>.
             </p>
@@ -114,10 +116,11 @@ return (
             onChange={(e) => setBio(e.target.value)}
             rows={4}
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
-            placeholder={'z.B. "Sie müssen kreisen, Herrn Schorch"'}
+            placeholder={'e.g. Amazon CEO'}
           />
           <div className="flex mb-5 items-center space-x-3">
             <Image src="/2-black.png" width={30} height={30} alt="1 icon" />
+            <p className="text-left font-medium">Select your vibe.</p>
             <p className="text-left font-medium">Wähle deinen Vibe.</p>
           </div>
           <div className="block">
@@ -128,7 +131,7 @@ return (
               className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
               onClick={(e) => generateBio(e)}
             >
-              Antworten generieren &rarr;
+              Generate your bio &rarr;
             </button>
           )}
           {loading && (
@@ -154,7 +157,7 @@ return (
                   className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto"
                   ref={bioRef}
                 >
-                  Deine KI-optimierten Antworten
+                  Your generated bios
                 </h2>
               </div>
               <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
