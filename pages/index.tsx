@@ -12,6 +12,7 @@ import {
   ParsedEvent,
   ReconnectInterval,
 } from 'eventsource-parser';
+
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState('');
@@ -33,18 +34,18 @@ const Home: NextPage = () => {
   console.log({ prompt });
   console.log({ generatedBios });
   const generateBio = async (e: any) => {
-  e.preventDefault();
-  setGeneratedBios('');
-  setLoading(true);
-  const response = await fetch('/api/openai', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      prompt,
-    }),
-  });
+    e.preventDefault();
+    setGeneratedBios('');
+    setLoading(true);
+    const response = await fetch('/api/openai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt,
+      }),
+    });
     if (!response.ok) {
       throw new Error(response.statusText);
     }
@@ -64,18 +65,7 @@ const Home: NextPage = () => {
         }
       }
     };
-    const onParseMistral = (event: ParsedEvent | ReconnectInterval) => {
-      if (event.type === 'event') {
-        const data = event.data;
-        try {
-          const text = JSON.parse(data).choices[0].text ?? '';
-          setGeneratedBios((prev) => prev + text);
-        } catch (e) {
-          console.error(e);
-        }
-      }
-    };
-    const onParse = isGPT ? onParseGPT : onParseMistral;
+    const onParse = onParseGPT;
     // https://web.dev/streams/#the-getreader-and-read-methods
     const reader = data.getReader();
     const decoder = new TextDecoder();
@@ -90,6 +80,7 @@ const Home: NextPage = () => {
     scrollToBios();
     setLoading(false);
   };
+
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
