@@ -12,13 +12,11 @@ import {
   ParsedEvent,
   ReconnectInterval,
 } from 'eventsource-parser';
-import Toggle from '../components/Toggle';
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState('');
   const [vibe, setVibe] = useState<VibeType>('Professional');
   const [generatedBios, setGeneratedBios] = useState<String>('');
-  const [isGPT, setIsGPT] = useState(false);
   const bioRef = useRef<null | HTMLDivElement>(null);
   const scrollToBios = () => {
     if (bioRef.current !== null) {
@@ -35,18 +33,18 @@ const Home: NextPage = () => {
   console.log({ prompt });
   console.log({ generatedBios });
   const generateBio = async (e: any) => {
-    e.preventDefault();
-    setGeneratedBios('');
-    setLoading(true);
-    const response = await fetch(isGPT ? '/api/openai' : '/api/mistral', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        prompt,
-      }),
-    });
+  e.preventDefault();
+  setGeneratedBios('');
+  setLoading(true);
+  const response = await fetch('/api/openai', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      prompt,
+    }),
+  });
     if (!response.ok) {
       throw new Error(response.statusText);
     }
@@ -106,9 +104,7 @@ const Home: NextPage = () => {
         <h1 className="sm:text-6xl text-4xl max-w-[708px] font-bold text-slate-900">
           Dein AI-Wingman klärt jedes Date
         </h1>
-        <div className="mt-7">
-          <Toggle isGPT={isGPT} setIsGPT={setIsGPT} />
-        </div>
+  
         <div className="max-w-xl w-full">
           <div className="flex mt-10 items-center space-x-3">
             <Image
