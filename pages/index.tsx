@@ -84,16 +84,15 @@ const prompt = `Generiere 3 ${
       <Head>
         <title>K.I. Wingman</title>
         <link rel="icon" href="/favicon.ico" />
-               {/* Hotjar Tracking Code */}
-        <script>
-          {`(function(h,o,t,j,a,r){
-            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:3917082,hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
+               {/* Mouseflow Tracking Code */}
+        <script type="text/javascript">
+          {`window._mfq = window._mfq || [];
+            (function() {
+              var mf = document.createElement("script");
+              mf.type = "text/javascript"; mf.defer = true;
+              mf.src = "//cdn.mouseflow.com/projects/6bd134ad-13a2-4655-9832-519adff62bb3.js";
+              document.getElementsByTagName("head")[0].appendChild(mf);
+            })();`}
         </script>
       </Head>
       <Header />
