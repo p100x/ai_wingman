@@ -7,7 +7,7 @@ export default function Header() {
       <Link href="/" className="flex space-x-3">
         <img
           alt="header text"
-          src="/write.svg"
+          src="/rizzomat.png"
           className="sm:w-9 sm:h-9 w-8 h-8"
         />
         <h1 className="sm:text-3xl text-2xl font-bold ml-2 tracking-tight">
