@@ -1,20 +1,15 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react'; // Füge useEffect zum Import hinzu
 import { Toaster, toast } from 'react-hot-toast';
 import DropDown, { VibeType } from '../components/DropDown';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import LoadingDots from '../components/LoadingDots';
-import {
-  createParser,
-  ParsedEvent,
-  ReconnectInterval,
-} from 'eventsource-parser';
 
 const Home: NextPage = () => {
-  const Home: NextPage = () => {
+  // useEffect direkt hier nutzen, ohne eine innere Home-Komponente zu deklarieren
   useEffect(() => {
     // Hotjar-Tracking-Code als Inline-Script hinzufügen
     const hotjarScript = document.createElement('script');
@@ -27,6 +22,7 @@ const Home: NextPage = () => {
       document.body.removeChild(hotjarScript);
     };
   }, []);
+
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState('');
   const [vibe, setVibe] = useState<VibeType>('Locker');
@@ -34,10 +30,9 @@ const Home: NextPage = () => {
   const bioRef = useRef<null | HTMLDivElement>(null);
 
   const scrollToBios = () => {
-    if (bioRef.current !== null) {
-      bioRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    bioRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+  
 const prompt = `Generiere 3 ${
   vibe === 'Locker' ? 'entspannte' : vibe === 'Lustig' ? 'witzige' : vibe === 'Horny' ? 'sehr aufs äußere bezogene und erotisch betonte' : 'distanzierte'
 } Antworten für einen Chat auf einer Dating-App wie ein erfahrener Dating-Coach es seinen Schülern vormachen würde, gelabeled als "1.", "2.", and "3.". Gib nur diese drei Nachrichten zurück, nichts anderes, stets ohne Anführungszeichen. ${
