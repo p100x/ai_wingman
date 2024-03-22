@@ -116,7 +116,7 @@ const prompt = `Generiere 3 ${
             onChange={(e) => setBio(e.target.value)}
             rows={4}
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
-            placeholder={'e.g. Amazon CEO'}
+            placeholder={'e.g. Kreisen, Herrn Schorch!'}
           />
           <div className="flex mb-5 items-center space-x-3">
             <Image src="/2-black.png" width={30} height={30} alt="1 icon" />
@@ -131,7 +131,7 @@ const prompt = `Generiere 3 ${
               className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
               onClick={(e) => generateBio(e)}
             >
-              Generate your bio &rarr;
+              Antworten generieren &rarr;
             </button>
           )}
           {loading && (
@@ -157,7 +157,7 @@ const prompt = `Generiere 3 ${
                   className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto"
                   ref={bioRef}
                 >
-                  Your generated bios
+                  KI-optimierte Antworten:
                 </h2>
               </div>
               <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
