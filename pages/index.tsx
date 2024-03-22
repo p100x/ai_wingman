@@ -144,7 +144,7 @@ const prompt = `Generiere 3 ${
               className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
               onClick={(e) => generateBio(e)}
             >
-              Antworten generieren &rarr;
+              Rizz Sprüche generieren &rarr;
             </button>
           )}
           {loading && (
