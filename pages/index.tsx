@@ -26,9 +26,9 @@ const Home: NextPage = () => {
   };
 const prompt = `Generiere 3 ${
   vibe === 'Locker' ? 'entspannte' : vibe === 'Lustig' ? 'witzige' : vibe === 'Horny' ? 'sehr aufs äußere bezogene und erotisch betonte' : 'coole'
-} Antworten für einen Chat auf einer Dating-App wie ein extrem erfahrener Dating-Coach und Psychologie-Experte es seinen Schülern vormachen würde, gelabeled als "1.", "2.", and "3.". Gib nur diese drei Nachrichten zurück, nichts anderes, stets ohne Anführungszeichen. ${
+} Antworten für einen Chat auf einer Dating-App wie ein erfahrener Dating-Coach es seinen Schülern vormachen würde, gelabeled als "1.", "2.", and "3.". Gib nur diese drei Nachrichten zurück, nichts anderes, stets ohne Anführungszeichen. ${
   vibe === 'Lustig' ? 'Mache den Text humorvoll' : ''
-}Schreibe wie ein junger Mensch, nicht zu gehoben. Nutze Jugendslang wenn angebracht. Nutze dabei diesen Text als Ausgangspunkt der Unterhaltung: ${bio}${
+}Schreibe wie ein junger Mensch, schreibe Alltagssprache, vermeide hohle Phrasen und Smalltalk um jeden Preis. Nutze Jugendslang wenn angebracht. Nutze dabei diesen Text als Ausgangspunkt der Unterhaltung: ${bio}${
   bio.slice(-1) === '.' ? '' : '.'
 }`;
   console.log({ prompt });
