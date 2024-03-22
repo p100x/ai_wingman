@@ -1,38 +1,31 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react'; // Füge useEffect zum Import hinzu
+import { useRef, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import DropDown, { VibeType } from '../components/DropDown';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import LoadingDots from '../components/LoadingDots';
+import {
+  createParser,
+  ParsedEvent,
+  ReconnectInterval,
+} from 'eventsource-parser';
 
 const Home: NextPage = () => {
-  // useEffect direkt hier nutzen, ohne eine innere Home-Komponente zu deklarieren
-  useEffect(() => {
-    // Hotjar-Tracking-Code als Inline-Script hinzufügen
-    const hotjarScript = document.createElement('script');
-    hotjarScript.async = true;
-    hotjarScript.src = `https://static.hotjar.com/c/hotjar-3917082.js?sv=6`;
-    document.body.appendChild(hotjarScript);
-
-    return () => {
-      // Beim Aufräumen den Hotjar-Script-Tag entfernen
-      document.body.removeChild(hotjarScript);
-    };
-  }, []);
-
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState('');
   const [vibe, setVibe] = useState<VibeType>('Locker');
+  const [generatedBios, setGeneratedBios] = useState<String>('');
   const [generatedBios, setGeneratedBios] = useState<string>('');
   const bioRef = useRef<null | HTMLDivElement>(null);
 
   const scrollToBios = () => {
-    bioRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (bioRef.current !== null) {
+      bioRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
-  
 const prompt = `Generiere 3 ${
   vibe === 'Locker' ? 'entspannte' : vibe === 'Lustig' ? 'witzige' : vibe === 'Horny' ? 'sehr aufs äußere bezogene und erotisch betonte' : 'distanzierte'
 } Antworten für einen Chat auf einer Dating-App wie ein erfahrener Dating-Coach es seinen Schülern vormachen würde, gelabeled als "1.", "2.", and "3.". Gib nur diese drei Nachrichten zurück, nichts anderes, stets ohne Anführungszeichen. ${
@@ -43,6 +36,25 @@ const prompt = `Generiere 3 ${
   console.log({ prompt });
   console.log({ generatedBios });
   const generateBio = async (e: any) => {
+    e.preventDefault();
+    setGeneratedBios('');
+    setLoading(true);
+    const response = await fetch('/api/openai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    // This data is a ReadableStream
+    const data = response.body;
+    if (!data) {
+      return;
   e.preventDefault();
   setGeneratedBios('');
   setLoading(true);
@@ -73,6 +85,15 @@ const prompt = `Generiere 3 ${
         console.error(e);
       }
     }
+    const onParseGPT = (event: ParsedEvent | ReconnectInterval) => {
+      if (event.type === 'event') {
+        const data = event.data;
+        try {
+          const text = JSON.parse(data).text ?? '';
+          setGeneratedBios((prev) => prev + text);
+        } catch (e) {
+          console.error(e);
+        }
   };
   const onParse = onParseGPT;
   // https://web.dev/streams/#the-getreader-and-read-methods
@@ -101,10 +122,25 @@ const prompt = `Generiere 3 ${
       } else {
         console.error('Failed to log output');
       }
+    };
+    const onParse = onParseGPT;
+    // https://web.dev/streams/#the-getreader-and-read-methods
+    const reader = data.getReader();
+    const decoder = new TextDecoder();
+    const parser = createParser(onParse);
+    let done = false;
+    while (!done) {
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+      const chunkValue = decoder.decode(value);
+      parser.feed(chunkValue);
     } catch (error) {
       console.error('Error logging output:', error);
     }
+    scrollToBios();
+    setLoading(false);
   };
+  return (
   // Call the sendOutputToBackend function with the generated output
   sendOutputToBackend(generatedBios);
 
@@ -144,6 +180,7 @@ return (
             onChange={(e) => setBio(e.target.value)}
             rows={4}
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
+            placeholder={'e.g. Amazon CEO'}
             placeholder={'z.B. "Sie müssen kreisen, Herrn Schorch"'}
           />
           <div className="flex mb-5 items-center space-x-3">
