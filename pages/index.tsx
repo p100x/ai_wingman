@@ -14,9 +14,13 @@ import {
 } from 'eventsource-parser';
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
+const [hoverEffect, setHoverEffect] = useState(false);
   const [bio, setBio] = useState('');
   const [vibe, setVibe] = useState<VibeType>('Locker');
   const [generatedBios, setGeneratedBios] = useState<String>('');
+  const [datesCount, setDatesCount] = useState(96434); // Initialer Wert der Dates
+const dateCountRef = useRef<HTMLParagraphElement>(null); // Ref für das Date-Element
+
   const bioRef = useRef<null | HTMLDivElement>(null);
   const scrollToBios = () => {
     if (bioRef.current !== null) {
@@ -94,6 +98,9 @@ const prompt = `Generiere 3 ${
               document.getElementsByTagName("head")[0].appendChild(mf);
             })();`}
         </script>
+         {/* Google Adsense Script hinzufügen */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6460745798968355"
+          crossorigin="anonymous"></script>
       </Head>
       <Header />
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:mt-20">
