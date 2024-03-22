@@ -12,14 +12,12 @@ import {
   ParsedEvent,
   ReconnectInterval,
 } from 'eventsource-parser';
-
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState('');
   const [vibe, setVibe] = useState<VibeType>('Locker');
-  const [generatedBios, setGeneratedBios] = useState<string>('');
+  const [generatedBios, setGeneratedBios] = useState<String>('');
   const bioRef = useRef<null | HTMLDivElement>(null);
-
   const scrollToBios = () => {
     if (bioRef.current !== null) {
       bioRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -35,87 +33,55 @@ const prompt = `Generiere 3 ${
   console.log({ prompt });
   console.log({ generatedBios });
   const generateBio = async (e: any) => {
-  e.preventDefault();
-  setGeneratedBios('');
-  setLoading(true);
-  const response = await fetch('/api/openai', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      prompt,
-    }),
-  });
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-  // This data is a ReadableStream
-   const data = response.body;
-  if (!data) {
-    return;
-  }
-  const onParseGPT = (event: ParsedEvent | ReconnectInterval) => {
-    if (event.type === 'event') {
-      const data = event.data;
-      try {
-        const text = JSON.parse(data).text ?? '';
-        setGeneratedBios((prev) => prev + text);
-      } catch (e) {
-        console.error(e);
-      }
+    e.preventDefault();
+    setGeneratedBios('');
+    setLoading(true);
+    const response = await fetch('/api/openai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
     }
-  };
-  const onParse = onParseGPT;
-  // https://web.dev/streams/#the-getreader-and-read-methods
-  const reader = data.getReader();
-  const decoder = new TextDecoder();
-  const parser = createParser(onParse);
-  let done = false;
-  while (!done) {
-    const { value, done: doneReading } = await reader.read();
-    done = doneReading;
-    const chunkValue = decoder.decode(value);
-    parser.feed(chunkValue);
-  }
-  // Send the generated output to the backend
- const sendOutputToBackend = async (output: string) => {
-    try {
-    const response = await fetch('/api/logOutput', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ output }),
-      });
-      if (response.ok) {
-        console.log('Output logged successfully');
-      } else {
-        console.error('Failed to log output');
-      }
-    } catch (error) {
-      console.error('Error logging output:', error);
+    // This data is a ReadableStream
+    const data = response.body;
+    if (!data) {
+      return;
     }
+    const onParseGPT = (event: ParsedEvent | ReconnectInterval) => {
+      if (event.type === 'event') {
+        const data = event.data;
+        try {
+          const text = JSON.parse(data).text ?? '';
+          setGeneratedBios((prev) => prev + text);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    const onParse = onParseGPT;
+    // https://web.dev/streams/#the-getreader-and-read-methods
+    const reader = data.getReader();
+    const decoder = new TextDecoder();
+    const parser = createParser(onParse);
+    let done = false;
+    while (!done) {
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+      const chunkValue = decoder.decode(value);
+      parser.feed(chunkValue);
+    }
+    scrollToBios();
+    setLoading(false);
   };
-  // Call the sendOutputToBackend function with the generated output
-  sendOutputToBackend(generatedBios);
-
-};
-
-return (
+  return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
-        <!-- Hotjar Tracking Code for Site 3917082 (name missing) -->
-<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:3917082,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
         <title>K.I. Wingman</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -147,6 +113,7 @@ return (
             onChange={(e) => setBio(e.target.value)}
             rows={4}
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
+            placeholder={'e.g. Amazon CEO'}
             placeholder={'z.B. "Sie müssen kreisen, Herrn Schorch"'}
           />
           <div className="flex mb-5 items-center space-x-3">
