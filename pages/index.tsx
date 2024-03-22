@@ -118,7 +118,7 @@ const Home: NextPage = () => {
           <b>96,434</b> bios generated so far
         </p>
         <h1 className="sm:text-6xl text-4xl max-w-[708px] font-bold text-slate-900">
-          Generate your next Twitter bio using AI
+          Dein AI-Wingman klärt jedes Date
         </h1>
         <div className="mt-7">
           <Toggle isGPT={isGPT} setIsGPT={setIsGPT} />
