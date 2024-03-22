@@ -99,8 +99,8 @@ const prompt = `Generiere 3 ${
             })();`}
         </script>
          {/* Google Adsense Script hinzufügen */}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6460745798968355"
-          crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6460745798968355"
+      crossOrigin="anonymous"></script>
       </Head>
       <Header />
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:mt-20">
