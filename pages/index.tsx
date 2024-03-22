@@ -93,7 +93,7 @@ const prompt = `Generiere 3 ${
           <b>96,434</b> Dates geklärt
         </p>
         <h1 className="sm:text-6xl text-4xl max-w-[708px] font-bold text-slate-900">
-          Dein AI-Wingman klärt jedes Date
+          K.I. Date-Doctor - Nie wieder unangenehmes Schweigen
         </h1>
   
         <div className="max-w-xl w-full">
