@@ -192,9 +192,21 @@ const prompt = `Generiere 3 ${
         </div>
       </main>
       <div className="seo-text-section mt-10 mb-20 px-4">
-  <h2 className="text-3xl font-bold text-center mb-4">Dein SEO-Titel</h2>
+  <h2 className="text-3xl font-bold text-center mb-4">Finde die perfekten Anmachsprüche mit KI-Unterstützung</h2>
   <p className="text-lg text-center max-w-4xl mx-auto">
-    Hier kommt dein SEO-optimierter Text. Dieser sollte relevant für die Seite sein und Keywords enthalten, nach denen deine Zielgruppe sucht. Denke daran, den Text natürlich fließen zu lassen und für deine Leserinnen und Leser wertvoll zu gestalten.
+    Willkommen beim Rizzomat – deinem ultimativen Tool für innovative und unwiderstehliche Anmachsprüche, die in Deutschland Furore machen. In einer Welt, in der der erste Eindruck zählt, geben wir dir die Geheimwaffe an die Hand, um mit Selbstbewusstsein und Charme ins Gespräch einzusteigen. Ob du nach einem humorvollen Einstieg, einem süßen Kompliment oder etwas Kühnem und Direktem suchst, der Rizzomat nutzt fortschrittliche KI-Technologie, um dir maßgeschneiderte Sprüche zu liefern, die nicht nur Aufmerksamkeit erregen, sondern auch Herzen erobern.
+
+Warum KI-Anmachsprüche?
+In der heutigen digitalisierten Welt hat sich die Kunst des Flirtens weiterentwickelt. Standardisierte Anmachsprüche aus dem Internet reichen nicht mehr aus, um sich von der Masse abzuheben. Hier kommt der Rizzomat ins Spiel: Unsere KI analysiert eine Vielzahl von Faktoren – von aktuellen Trends bis hin zu psychologischen Nuancen –, um Anmachsprüche zu generieren, die authentisch, kreativ und vor allem effektiv sind.
+
+Individualität, die begeistert
+Egal, ob du die Dating-Welt auf Tinder, Bumble oder im realen Leben erkundest, der erste Schritt zum Erfolg liegt in der Einzigartigkeit. Mit dem Rizzomat kannst du deine Persönlichkeit durch maßgeschneiderte Sprüche zum Ausdruck bringen, die zu deinem Stil und deiner Stimmung passen. Wähle aus Kategorien wie "locker", "lustig", "erotisch" oder "cool" und finde den Vibe, der am besten zu dir passt.
+
+Dein Erfolg ist unser Ziel
+Mit bereits über 96.434 erfolgreich geklärten Dates und einer ständig wachsenden Community ist der Rizzomat mehr als nur eine Plattform – es ist ein Beweis dafür, dass die richtigen Worte den Unterschied machen können. Unsere Mission ist es, dir nicht nur beim Start des Gesprächs zu helfen, sondern auch dabei, echte Verbindungen und unvergessliche Momente zu schaffen.
+
+Beginne jetzt deine Erfolgsgeschichte
+Bereit, dein Dating-Spiel auf das nächste Level zu heben? Der Rizzomat ist hier, um dir mit den neuesten KI-generierten Anmachsprüchen auf Deutsch zu Seite zu stehen. Tauche ein in die Welt des modernen Flirtens, wo Innovation auf Charme trifft, und entdecke, wie unsere KI-Anmachsprüche den Unterschied in deinem Liebesleben machen können.
   </p>
 </div>
       <Footer />
