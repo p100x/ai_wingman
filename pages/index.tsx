@@ -108,14 +108,14 @@ const Home: NextPage = () => {
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
-        <title>Twitter Bio Generator</title>
+        <title>K.I. Wingman</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Header />
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:mt-20">
         <p className="border rounded-2xl py-1 px-4 text-slate-500 text-sm mb-5 hover:scale-105 transition duration-300 ease-in-out">
-          <b>96,434</b> bios generated so far
+          <b>96,434</b> Dates geklärt
         </p>
         <h1 className="sm:text-6xl text-4xl max-w-[708px] font-bold text-slate-900">
           Dein AI-Wingman klärt jedes Date
