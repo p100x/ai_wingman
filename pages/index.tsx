@@ -16,8 +16,10 @@ const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState('');
   const [vibe, setVibe] = useState<VibeType>('Locker');
+  const [generatedBios, setGeneratedBios] = useState<String>('');
   const [generatedBios, setGeneratedBios] = useState<string>('');
   const bioRef = useRef<null | HTMLDivElement>(null);
+
   const scrollToBios = () => {
     if (bioRef.current !== null) {
       bioRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -79,8 +81,7 @@ const prompt = `Generiere 3 ${
   // Send the generated output to the backend
  const sendOutputToBackend = async (output: string) => {
     try {
-    const response = await fetch('/api/logOutputs', {
-    const response = await fetch('/api/logOutput', {
+      const response = await fetch('/api/logOutput', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
