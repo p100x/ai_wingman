@@ -191,6 +191,12 @@ const prompt = `Generiere 3 ${
           )}
         </div>
       </main>
+      <div className="seo-text-section mt-10 mb-20 px-4">
+  <h2 className="text-3xl font-bold text-center mb-4">Dein SEO-Titel</h2>
+  <p className="text-lg text-center max-w-4xl mx-auto">
+    Hier kommt dein SEO-optimierter Text. Dieser sollte relevant für die Seite sein und Keywords enthalten, nach denen deine Zielgruppe sucht. Denke daran, den Text natürlich fließen zu lassen und für deine Leserinnen und Leser wertvoll zu gestalten.
+  </p>
+</div>
       <Footer />
     </div>
   );
